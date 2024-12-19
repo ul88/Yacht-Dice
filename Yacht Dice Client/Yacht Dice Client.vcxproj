@@ -21,10 +21,9 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{82f8efbe-e0a8-42b0-96a5-33dfb18f573a}</ProjectGuid>
-    <RootNamespace>YachtDice</RootNamespace>
+    <ProjectGuid>{927a6649-efc9-41b2-894e-9f19f842b9db}</ProjectGuid>
+    <RootNamespace>YachtDiceClient</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Yacht Dice Server</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -105,7 +104,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,18 +127,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Dice.cpp" />
-    <ClCompile Include="ServerMain.cpp" />
-    <ClCompile Include="ScoreBoard.cpp" />
-    <ClCompile Include="Serialization.cpp" />
-    <ClCompile Include="TcpSocket.cpp" />
-    <ClCompile Include="Serialization.h" />
+    <ClInclude Include="Deserialization.h" />
+    <ClInclude Include="Dice.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="TcpSocket.h" />
+    <ClInclude Include="YachtBoard.h" />
+    <ClInclude Include="YachtHand.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Dice.h" />
-    <ClInclude Include="ScoreBoard.h" />
-    <ClInclude Include="TcpSocket.h" />
-    <ClInclude Include="YachtHand.h" />
+    <ClCompile Include="Deserialization.cpp" />
+    <ClCompile Include="ClientMain.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="TcpSocket.cpp" />
+    <ClCompile Include="YachtBoard.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="protocol.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
