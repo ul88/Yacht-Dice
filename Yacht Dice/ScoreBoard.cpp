@@ -3,6 +3,7 @@
 bool ScoreBoard::setScoreBoard(YachtHand yh) { // 스코어 보드 갱신
 	if (scoreBoard[static_cast<int>(yh)] == 0) {
 		scoreBoard[static_cast<int>(yh)] = tempBoard[static_cast<int>(yh)];
+		score += scoreBoard[static_cast<int>(yh)];
 		return true;
 	}
 	return false;

@@ -23,6 +23,9 @@ int recvFromPlayer(TcpSocket& player_sock, ScoreBoard& board, Dice& d) {
 				board.checkHand(d);
 			}
 		}
+		else if (d.getRerollCount() != 3 && num == 7) {
+			d.setRerollCount(0);
+		}
 		else if(d.getRerollCount() != 3 && num <= 5 && num >= 1) {
 			d.setReroll(num - 1);
 			for (int i = 0;i < 5;i++) {
@@ -32,7 +35,7 @@ int recvFromPlayer(TcpSocket& player_sock, ScoreBoard& board, Dice& d) {
 		break;
 	case 's':
 		player_sock.Recv((void*)&num, sizeof(num));
-		if (board.setScoreBoard(static_cast<YachtHand>(num))) {
+		if (board.setScoreBoard(static_cast<YachtHand>(num-1))) {
 			d.initDice();
 			flag = 'g';
 			player_sock.Send((void*)&flag, sizeof(flag));
@@ -90,5 +93,26 @@ int main()
 		}
 	}
 
+	// 게임 종료
+	char name[100];
+	int score;
+	if (p1_board.getScore() > p2_board.getScore()) {
+		strcpy_s(name, sizeof(name), "player1");
+		score = p1_board.getScore();
+	}
+	else if (p1_board.getScore() < p2_board.getScore()) {
+		strcpy_s(name, sizeof(name), "player2");
+		score = p2_board.getScore();
+	}
+	else {
+		strcpy_s(name, sizeof(name), "same");
+		score = p1_board.getScore();
+	}
+	player1_sock.Send((void*)&name, sizeof(name));
+	player1_sock.Send((void*)&score, sizeof(score));
+	player2_sock.Send((void*)&name, sizeof(name));
+	player2_sock.Send((void*)&score, sizeof(score));
+
+	WSACleanup();
 	return 0;
 }

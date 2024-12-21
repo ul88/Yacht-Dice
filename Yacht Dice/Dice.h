@@ -16,6 +16,7 @@ public:
 	int getReroll(int index) { return isReroll[index]; }
 
 	void decreaseRerollCount() { isRerollCount--; }
+	void setRerollCount(int count) { isRerollCount = count; }
 	int getRerollCount() { return isRerollCount; }
 
 	void initDice() {

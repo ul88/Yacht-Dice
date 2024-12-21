@@ -13,6 +13,7 @@ public:
 		tempBoard.resize(static_cast<int>(YachtHand::SIZE));
 	}
 	void checkHand(Dice& d); // 족보 탐색
+	int getScore() { return score; }
 
 	std::vector<int> getScoreBoard() { return scoreBoard; } // 스코어보드 가져오기
 	int getScoreBoard(int index) { return scoreBoard[index]; }
@@ -24,6 +25,7 @@ public:
 private:
 	std::vector<int> scoreBoard; // 스코어보드
 	std::vector<int> tempBoard; // 족보를 담을 예비 스코어보드
+	int score; // 점수 합
 	// 족보 계산 함수들
 	int check4OfAKind(Dice& dice, std::vector<int>& cnt);
 	int checkFullHouse(Dice& dice, std::vector<int>& cnt);	

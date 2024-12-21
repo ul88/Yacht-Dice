@@ -12,6 +12,7 @@ void inputDice(TcpSocket& sock, int rerollCount) {
 		std::cout << "주사위를 선택하고 싶다면 1~5까지의 숫자를 입력해주세요." << std::endl;
 		std::cout << "리롤을 하고 싶다면 6을 선택해주세요.( 남은 리롤 개수: "
 			<< rerollCount << ")" << std::endl;
+		std::cout << "확정을 하고 싶다면 7을 선택해주세요." << std::endl;
 		std::cin >> num;
 		sock.Send((void*)&flag, sizeof(flag));
 		sock.Send((void*)&num, sizeof(num));
@@ -68,5 +69,14 @@ int main()
 		}
 	}
 
+	char name[100];
+	int score;
+	sock.Recv(name, 100);
+	sock.Recv((void*)&score, sizeof(score));
+
+	std::cout << "승자는 " << name << std::endl;
+	std::cout << "점수는 " << score << "점 입니다." << std::endl;
+
+	WSACleanup();
 	return 0;
 }
